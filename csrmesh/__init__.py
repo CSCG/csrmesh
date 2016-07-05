@@ -35,13 +35,14 @@ def make_packet(key,seq,data):
 
 def light_set_cmd(level, red, green, blue):
     cmd = b'\x73\x11'
+    test = b'\x01\x80'
     #for level only, -128 is full off and -1 is full on, RGB appears to be 0 to 255 so remap level to 0 to 255
     if(level < 0):
         level=0
     elif(level > 255):
         level=255
     level = (level//2)-128
-    p_cmd = struct.pack("<2x2s2xbBBB",cmd,level,red,green,blue)
+    p_cmd = struct.pack("<2x2s2sbBBB",cmd,test,level,red,green,blue)
     return p_cmd
 
 def random_seq():
